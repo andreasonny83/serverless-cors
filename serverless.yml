@@ -1,0 +1,52 @@
+org: andreasonny83
+service: serverless-cors
+configValidationMode: error
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  memorySize: 512
+  timeout: 8
+  stage: production
+  versionFunctions: false
+  apiGateway:
+    usagePlan:
+      quota:
+        limit: 1000
+        offset: 2
+        period: MONTH
+      throttle:
+        burstLimit: 100
+        rateLimit: 50
+
+functions:
+  cors:
+    handler: handler.cors
+    name: ${self:provider.stage}-test-cors
+    description: Test CORS rules
+    memorySize: 512
+    timeout: 8
+    events:
+      - http:
+          path: cors
+          method: get
+          cors:
+            origins:
+              - https://andreasonny830.ngrok.io
+              - https://andreasonny831.ngrok.io
+              - https://andreasonny832.ngrok.io
+            headers:
+              - Content-Type
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
+
+package:
+  patterns:
+    - '!yarn.lock'
+    - '!LICENSE'
+
+plugins:
+  - serverless-offline

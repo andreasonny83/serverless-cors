@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo App</title>
+  </head>
+  <body>
+    <script>
+      const url = "YOUR_AWS_LAMBDA_FUNCTION_URL";
+      function get() {
+        try {
+          fetch(url, { headers: { "X-Api-Key": "test" } });
+        } catch (err) {
+          console.warn(err);
+        }
+      }
+
+      function post() {
+        try {
+          fetch(url, {
+            method: "POST",
+            body: JSON.stringify({}),
+          });
+        } catch (err) {
+          console.warn(err);
+        }
+      }
+    </script>
+    <button onclick="get()">GET</button>
+    <button onclick="post()">POST</button>
+  </body>
+</html>

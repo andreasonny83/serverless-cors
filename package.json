@@ -1,0 +1,15 @@
+{
+  "name": "serverless-cors",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "serverless offline start",
+    "start:client": "serve client"
+  },
+  "devDependencies": {
+    "serve": "^12.0.0",
+    "serverless-offline": "^7.0.0"
+  },
+  "dependencies": {}
+}
